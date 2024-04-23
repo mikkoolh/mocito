@@ -49,14 +49,15 @@ public class TilaustenKäsittelyMockitoTest {
         float alkusaldo = 150.0f;
         float ovh = 140.0f;
         float ale = 20.0f;
-        float loppusaldo = alkusaldo - (ovh * (1 - (ale+5) / 100));
+        float korotus = 5.0f;
+        float loppusaldo = alkusaldo - (ovh * (1 - (ale+korotus) / 100));
         Asiakas asiakas = new Asiakas(alkusaldo);
 
         Tuote tuote = new Tuote("TDD in Action", ovh);
 
         // Record
         when(hinnoittelijaMock.getAlennusProsentti(asiakas, tuote))
-                .thenReturn(ale, (ale+5));
+                .thenReturn(ale, (ale+korotus));
         
         // Act
         TilaustenKäsittely käsittelijä = new TilaustenKäsittely();
